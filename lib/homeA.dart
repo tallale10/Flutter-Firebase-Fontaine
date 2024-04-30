@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:authenticationapp/login.dart';
-import 'package:authenticationapp/homeA.dart';
+import 'package:authenticationapp/home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: HomeA(),
+  ));
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,19 +21,19 @@ class MyApp extends StatelessWidget {
         const Locale('ar'), // Arabic
       ],
       locale: Locale('en'), // Default language
-      home: Home(),
+      home: HomeA(),
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key});
+class HomeA extends StatefulWidget {
+  const HomeA({Key? key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeA> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<HomeA> {
   bool isOn = false;
   Color selectedColor = Colors.red; // Default color
 
@@ -60,7 +61,7 @@ class _HomeState extends State<Home> {
   void logout() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MyApp()),
+      MaterialPageRoute(builder: (context) => LoginPage()),
     );
   }
 
@@ -69,24 +70,23 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Menu"),
+          title: Text("قائمة"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               GestureDetector(
-                onTap: () {
+              onTap: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HomeA()));
-              },                child: Text("العربية"),
+                MaterialPageRoute(builder: (context) => Home()));
+              },                child: Text("الفرنسية"),
               ),
               SizedBox(height: 8),
               GestureDetector(
                 onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LogIn()));
-                  },
-                child: Text("تسجيل الخروج"),
+                  },                child: Text("تسجيل الخروج"),
               ),
             ],
           ),
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contrôleur de fontaine"),
+        title: Text("تحكم في النافورة"),
         centerTitle: true,
         leading: IconButton(
                 icon: Icon(Icons.arrow_back),
@@ -120,14 +120,14 @@ class _HomeState extends State<Home> {
           children: [
             ElevatedButton(
               onPressed: toggleSwitch,
-              child: Text(isOn ? 'ON' : 'OFF'),
+              child: Text(isOn ? 'شغل' : 'اطفأ'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: isOn ? const Color.fromARGB(255, 96, 244, 101) : Colors.grey,
               ),
             ),
             SizedBox(height: 16),
             Text(
-              "Des tensionsà",
+              "التأثيرات",
               style: TextStyle(
                 color: selectedColor,
                 fontSize: 16,
@@ -137,13 +137,13 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                  ColorButton(Colors.red, 'Feu 1', changeColor),
-                  ColorButton(Colors.blue, 'Feu 2', changeColor),
-                  ColorButton(Colors.green, 'Feu 3', changeColor),
+                ColorButton(Colors.red, 'التأثير 1', changeColor),
+                ColorButton(Colors.blue, 'التأثير 2', changeColor),
+                ColorButton(Colors.green, 'التأثير 3', changeColor),
               ],
-              ),
+            ),
             SizedBox(height: 16),
-          
+            
           ],
         ),
       ),
@@ -162,10 +162,6 @@ class ColorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          text,
-          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-        ),
         GestureDetector(
           onTap: () => onTap(color),
           child: Container(
@@ -176,12 +172,22 @@ class ColorButton extends StatelessWidget {
               color: color,
               borderRadius: BorderRadius.circular(20),
             ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
       ],
     );
   }
 }
+
 
 
 class LoginPage extends StatelessWidget {

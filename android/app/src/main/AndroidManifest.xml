@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="authenticationapp"
-        android:name="com.example.authenticationapp"
+        android:label="Full-Flutter-Firebase-Auth-main"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

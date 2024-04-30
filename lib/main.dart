@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'DIGISAND',
+              'DiGISAND',
               style: TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
